@@ -1,6 +1,6 @@
 """
-MCP server for Project Kanban. Exposes kanban operations as tools so cloud agents
-Cursor and other MCP clients can read and update projects and tasks.
+MCP server for Project Kanban. Exposes kanban operations as tools so
+MCP clients can read and update projects and tasks.
 """
 
 import json
@@ -76,7 +76,7 @@ def kanban_list_tasks(project_id: str, status_filter: str | None = None) -> str:
     if status_filter and status_filter.lower() in ("todo", "in-progress", "done"):
         tasks = [t for t in tasks if t.get("status") == status_filter.lower()]
     out = [
-        {"id": t["id"], "title": t["title"], "status": t.get("status", "todo"), "assignedTo": t.get("assignedTo")}
+        {"id": t["id"], "title": t["title"], "status": t.get("status", "todo")}
         for t in tasks
     ]
     return json.dumps(out, indent=2)
@@ -111,24 +111,6 @@ def kanban_update_task_status(
     return json.dumps(data, indent=2)
 
 
-@mcp.tool()
-def kanban_report_task_progress(
-    project_id: str,
-    task_id: str,
-    update_type: str,
-    content: str = "",
-) -> str:
-    """
-    Report progress on a task (for cloud agents). update_type: progress | completed | blocked | review.
-    Use 'progress' for status updates, 'completed' to mark done, 'blocked' when stuck, 'review' when ready for review.
-    """
-    if update_type not in ("progress", "completed", "blocked", "review"):
-        return json.dumps({"error": "update_type must be progress, completed, blocked, or review"})
-    data = _post(
-        f"/projects/{project_id}/tasks/{task_id}/claude-update",
-        json_data={"type": update_type, "content": content},
-    )
-    return json.dumps(data, indent=2)
 
 
 @mcp.tool()
@@ -154,10 +136,10 @@ def kanban_add_worklog_entry(
     files: str = "",
 ) -> str:
     """
-    Add a work log entry to a project. Use this to record what was done (for Cursor to fill in after completing work).
+    Add a work log entry to a project. Use this to record what was done.
     files: optional comma-separated list of file paths that were changed.
     """
-    payload = {"content": content, "type": "step", "author": "Cursor"}
+    payload = {"content": content, "type": "step", "author": "User"}
     if details:
         payload["details"] = details
     if files:
@@ -166,26 +148,6 @@ def kanban_add_worklog_entry(
     return json.dumps(data, indent=2)
 
 
-@mcp.tool()
-def kanban_list_tasks_assigned_to_cursor() -> str:
-    """List all tasks assigned to Cursor across all projects. Use this to find your assigned work."""
-    projects = _get("/projects")
-    out = []
-    for p in projects:
-        for t in p.get("tasks", []):
-            if t.get("assignedTo") == "cursor":
-                out.append({
-                    "project_id": p["id"],
-                    "project_title": p["title"],
-                    "task_id": t["id"],
-                    "task_title": t["title"],
-                    "instructions": t.get("claudeInstructions", ""),
-                    "files": t.get("cursorFiles", []),
-                    "work_dir": t.get("cursorWorkDir") or p.get("codeDir", ""),
-                    "branch": t.get("cursorBranch"),
-                    "status": t.get("claudeStatus", "pending"),
-                })
-    return json.dumps(out, indent=2)
 
 
 @mcp.tool()

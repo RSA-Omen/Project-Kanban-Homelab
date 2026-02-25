@@ -23,36 +23,6 @@ const api = {
         });
         return res.json();
     },
-    async assignToClaude(projectId, instructions) {
-        const res = await fetch(`${API_BASE}/projects/${projectId}/assign-claude`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ instructions })
-        });
-        return res.json();
-    },
-    async unassignFromClaude(projectId) {
-        const res = await fetch(`${API_BASE}/projects/${projectId}/unassign-claude`, {
-            method: 'POST'
-        });
-        return res.json();
-    },
-    async answerClaudeQuestion(projectId, questionId, answer) {
-        const res = await fetch(`${API_BASE}/projects/${projectId}/answer-question/${questionId}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ answer })
-        });
-        return res.json();
-    },
-    async claudeReviewProject(projectId, model) {
-        const res = await fetch(`${API_BASE}/projects/${projectId}/claude-review`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ model: model || 'llama3.2' })
-        });
-        return res.json();
-    },
     async createProject(project) {
         const res = await fetch(`${API_BASE}/projects`, {
             method: 'POST',
@@ -139,28 +109,6 @@ const api = {
         });
         return res.json();
     },
-    async assignTaskToCursor(projectId, taskId, instructions, files = [], workDir = '') {
-        const res = await fetch(`${API_BASE}/projects/${projectId}/tasks/${taskId}/assign-cursor`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ instructions, files: files.filter(f => f.trim()), workDir })
-        });
-        return res.json();
-    },
-    async unassignTask(projectId, taskId) {
-        const res = await fetch(`${API_BASE}/projects/${projectId}/tasks/${taskId}/unassign`, {
-            method: 'POST'
-        });
-        return res.json();
-    },
-    async answerTaskQuestion(projectId, taskId, questionId, answer) {
-        const res = await fetch(`${API_BASE}/projects/${projectId}/tasks/${taskId}/answer-question/${questionId}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ answer })
-        });
-        return res.json();
-    },
     // Asana sync
     async syncToAsana(projectId) {
         const res = await fetch(`${API_BASE}/asana/sync-project/${projectId}`, { method: 'POST' });
@@ -190,29 +138,6 @@ const api = {
         const res = await fetch(`${API_BASE}/asana/unlink/${projectId}`, { method: 'POST' });
         return res.json();
     },
-    // Cursor management
-    async approveCursor(projectId, taskId) {
-        const res = await fetch(`${API_BASE}/projects/${projectId}/tasks/${taskId}/cursor-approve`, { method: 'POST' });
-        const j = await res.json();
-        if (!res.ok) throw new Error(j.error || 'Approve failed');
-        return j;
-    },
-    async feedbackCursor(projectId, taskId, feedback) {
-        const res = await fetch(`${API_BASE}/projects/${projectId}/tasks/${taskId}/cursor-feedback`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ feedback })
-        });
-        const j = await res.json();
-        if (!res.ok) throw new Error(j.error || 'Feedback failed');
-        return j;
-    },
-    async revertCursor(projectId, taskId) {
-        const res = await fetch(`${API_BASE}/projects/${projectId}/tasks/${taskId}/cursor-revert`, { method: 'POST' });
-        const j = await res.json();
-        if (!res.ok) throw new Error(j.error || 'Revert failed');
-        return j;
-    },
     async setCodeDir(projectId, codeDir) {
         const res = await fetch(`${API_BASE}/projects/${projectId}/code-dir`, {
             method: 'PUT',
@@ -231,14 +156,6 @@ const api = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ query, max_results: maxResults })
-        });
-        return res.json();
-    },
-    async wizardAiGenerate(system, prompt, model) {
-        const res = await fetch(`${API_BASE}/wizard/ai-generate`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ system, prompt, model })
         });
         return res.json();
     },
