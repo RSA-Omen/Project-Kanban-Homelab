@@ -161,35 +161,6 @@ const api = {
         });
         return res.json();
     },
-    // Asana sync
-    async syncToAsana(projectId) {
-        const res = await fetch(`${API_BASE}/asana/sync-project/${projectId}`, { method: 'POST' });
-        return res.json();
-    },
-    async pullFromAsana(projectId) {
-        const res = await fetch(`${API_BASE}/asana/pull-project/${projectId}`, { method: 'POST' });
-        return res.json();
-    },
-    async syncAllToAsana() {
-        const res = await fetch(`${API_BASE}/asana/sync-all`, { method: 'POST' });
-        return res.json();
-    },
-    async getAsanaStatus(projectId) {
-        const res = await fetch(`${API_BASE}/asana/status/${projectId}`);
-        return res.json();
-    },
-    async attachDocToAsana(projectId, category, name) {
-        const res = await fetch(`${API_BASE}/asana/attach-doc/${projectId}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ category, name })
-        });
-        return res.json();
-    },
-    async unlinkAsana(projectId) {
-        const res = await fetch(`${API_BASE}/asana/unlink/${projectId}`, { method: 'POST' });
-        return res.json();
-    },
     // Cursor management
     async approveCursor(projectId, taskId) {
         const res = await fetch(`${API_BASE}/projects/${projectId}/tasks/${taskId}/cursor-approve`, { method: 'POST' });
@@ -1282,18 +1253,6 @@ const DocsPanel = ({ project, onRefresh }) => {
         setLoading(false);
     };
 
-    const handleAttachToAsana = async (e, category, name) => {
-        e.stopPropagation();
-        try {
-            const result = await api.attachDocToAsana(project.id, category, name);
-            if (result.success) {
-                if (onRefresh) onRefresh();
-            }
-        } catch (err) {
-            // silent fail
-        }
-    };
-
     const renderDocList = (items) => {
         if (!items || items.length === 0) {
             return <p className="empty-text">No documents found.</p>;
@@ -1610,7 +1569,6 @@ const TaskBoard = ({ project, projects, onBack, onRefresh, onEditProject, showTo
     const [newTaskPriority, setNewTaskPriority] = useState('medium');
     const [newTaskDesc, setNewTaskDesc] = useState('');
     const [rightPanel, setRightPanel] = useState('task'); // 'task' | 'chat' | 'docs'
-    const [asanaSyncing, setAsanaSyncing] = useState(false);
 
     const tasks = project.tasks || [];
 
@@ -1682,38 +1640,6 @@ const TaskBoard = ({ project, projects, onBack, onRefresh, onEditProject, showTo
         } catch (error) {
             showToast('Failed to update status', 'error');
         }
-    };
-
-    const handleAsanaPush = async () => {
-        setAsanaSyncing(true);
-        try {
-            const result = await api.syncToAsana(project.id);
-            if (result.success) {
-                showToast('Pushed to Asana', 'success');
-                onRefresh();
-            } else {
-                showToast(result.error || 'Asana push failed', 'error');
-            }
-        } catch (e) {
-            showToast('Asana push failed', 'error');
-        }
-        setAsanaSyncing(false);
-    };
-
-    const handleAsanaPull = async () => {
-        setAsanaSyncing(true);
-        try {
-            const result = await api.pullFromAsana(project.id);
-            if (result.success) {
-                showToast(`Pulled from Asana: ${result.created} new, ${result.updated} updated`, 'success');
-                onRefresh();
-            } else {
-                showToast(result.error || 'Asana pull failed', 'error');
-            }
-        } catch (e) {
-            showToast('Asana pull failed', 'error');
-        }
-        setAsanaSyncing(false);
     };
 
     const taskColumns = [
@@ -4420,22 +4346,6 @@ const App = () => {
             }
         } catch (error) {
             showToast('Failed to sync from projects.json', 'error');
-        }
-    };
-
-    // Sync all to Asana
-    const handleSyncAllToAsana = async () => {
-        try {
-            showToast('Syncing all to Asana...');
-            const result = await api.syncAllToAsana();
-            if (result.success) {
-                showToast(`Asana sync: ${result.synced}/${result.total} projects`, 'success');
-                await loadProjects();
-            } else {
-                showToast('Asana sync failed', 'error');
-            }
-        } catch (error) {
-            showToast('Asana sync failed', 'error');
         }
     };
 
