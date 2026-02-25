@@ -38,3 +38,4 @@ Data is stored in `backend/data.json`. No DB required.
 ## Cloud agents (MCP)
 
 The `mcp-server/` exposes kanban as MCP tools so Cursor and other MCP clients can read/update projects and tasks. See `mcp-server/README.md`. Cursor config: `~/.cursor/mcp.json`.
+# Project-Kanban-Homelab
