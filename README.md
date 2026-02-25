@@ -1,5 +1,9 @@
 # Project Kanban + AI Assistant
 
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+![React](https://img.shields.io/badge/react-18-blue)
+
 Kanban board with project work log, optional Asana sync, and AI/task integrations.
 
 ## Quick start
@@ -38,4 +42,11 @@ Data is stored in `backend/data.json`. No DB required.
 ## Cloud agents (MCP)
 
 The `mcp-server/` exposes kanban as MCP tools so Cursor and other MCP clients can read/update projects and tasks. See `mcp-server/README.md`. Cursor config: `~/.cursor/mcp.json`.
-# Project-Kanban-Homelab
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and guidelines.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
