@@ -3351,64 +3351,6 @@ form {
     padding: 0.25rem 0.5rem;
 }
 
-/* ============================================
-   ASANA SYNC STYLES
-   ============================================ */
-
-.btn-asana {
-    background-color: rgba(240, 106, 106, 0.12);
-    color: #f06a6a;
-    font-weight: 600;
-    padding: 0.375rem 0.75rem;
-    border: 1px solid rgba(240, 106, 106, 0.2);
-    border-radius: var(--radius);
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-}
-
-.btn-asana:hover {
-    background-color: rgba(240, 106, 106, 0.2);
-    border-color: rgba(240, 106, 106, 0.35);
-}
-
-.btn-asana:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.btn-asana.btn-small {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.75rem;
-}
-
-.asana-badge {
-    display: inline-block;
-    padding: 0.0625rem 0.375rem;
-    background-color: rgba(240, 106, 106, 0.15);
-    color: #f06a6a;
-    border-radius: 3px;
-    font-size: 0.625rem;
-    font-weight: 600;
-    text-decoration: none;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    transition: background-color 0.15s;
-}
-
-.asana-badge:hover {
-    background-color: rgba(240, 106, 106, 0.3);
-}
-
-.asana-sync-info {
-    font-size: 0.6875rem;
-    color: var(--text-muted);
-    white-space: nowrap;
-}
-
 .docs-attach-btn {
     background-color: rgba(240, 106, 106, 0.15);
     color: #f06a6a;
