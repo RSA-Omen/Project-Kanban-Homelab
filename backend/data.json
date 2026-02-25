@@ -25,24 +25,6 @@
           "description": "",
           "status": "todo",
           "priority": "high",
-          "assignedTo": "claude",
-          "claudeStatus": "blocked",
-          "claudeInstructions": "",
-          "claudeQuestions": [],
-          "claudeUpdates": [
-            {
-              "id": "u_20260225082947_04fa1e99",
-              "type": "progress",
-              "content": "Bureau job started. Running in background\u2014typically 5\u201330 min. Task will update when complete.",
-              "timestamp": "2026-02-25T08:29:47.726864"
-            },
-            {
-              "id": "u_20260225082947_69be4e42",
-              "type": "blocked",
-              "content": "Bureau submit failed: Bureau returned 400: ",
-              "timestamp": "2026-02-25T08:29:47.733025"
-            }
-          ],
           "createdAt": "2026-02-24T14:00:00",
           "updatedAt": "2026-02-25T08:29:47.724483"
         },
@@ -52,16 +34,8 @@
           "description": "",
           "status": "todo",
           "priority": "high",
-          "assignedTo": "cursor",
-          "claudeStatus": "pending",
-          "claudeInstructions": "",
-          "claudeQuestions": [],
-          "claudeUpdates": [],
           "createdAt": "2026-02-24T14:00:00",
-          "updatedAt": "2026-02-25T08:35:27.634091",
-          "cursorFiles": [],
-          "cursorWorkDir": "",
-          "cursorBranch": null
+          "updatedAt": "2026-02-25T08:35:27.634091"
         },
         {
           "id": "t_003_scripts",
@@ -69,11 +43,6 @@
           "description": "",
           "status": "todo",
           "priority": "high",
-          "assignedTo": null,
-          "claudeStatus": null,
-          "claudeInstructions": "",
-          "claudeQuestions": [],
-          "claudeUpdates": [],
           "createdAt": "2026-02-24T14:00:00",
           "updatedAt": "2026-02-24T14:00:00"
         },
@@ -83,11 +52,6 @@
           "description": "",
           "status": "todo",
           "priority": "high",
-          "assignedTo": null,
-          "claudeStatus": null,
-          "claudeInstructions": "",
-          "claudeQuestions": [],
-          "claudeUpdates": [],
           "createdAt": "2026-02-24T14:00:00",
           "updatedAt": "2026-02-24T14:00:00"
         },
@@ -97,11 +61,6 @@
           "description": "",
           "status": "todo",
           "priority": "medium",
-          "assignedTo": null,
-          "claudeStatus": null,
-          "claudeInstructions": "",
-          "claudeQuestions": [],
-          "claudeUpdates": [],
           "createdAt": "2026-02-24T14:00:00",
           "updatedAt": "2026-02-24T14:00:00"
         }
@@ -142,16 +101,8 @@
           "description": "",
           "status": "todo",
           "priority": "high",
-          "assignedTo": "cursor",
-          "claudeStatus": "pending",
-          "claudeInstructions": "",
-          "claudeQuestions": [],
-          "claudeUpdates": [],
           "createdAt": "2026-02-24T12:00:00",
-          "updatedAt": "2026-02-25T08:49:44.020222",
-          "cursorFiles": [],
-          "cursorWorkDir": "",
-          "cursorBranch": null
+          "updatedAt": "2026-02-25T08:49:44.020222"
         },
         {
           "id": "t_002_api",
@@ -159,11 +110,6 @@
           "description": "",
           "status": "todo",
           "priority": "high",
-          "assignedTo": null,
-          "claudeStatus": null,
-          "claudeInstructions": "",
-          "claudeQuestions": [],
-          "claudeUpdates": [],
           "createdAt": "2026-02-24T12:00:00",
           "updatedAt": "2026-02-24T12:00:00"
         },
@@ -173,11 +119,6 @@
           "description": "",
           "status": "todo",
           "priority": "medium",
-          "assignedTo": null,
-          "claudeStatus": null,
-          "claudeInstructions": "",
-          "claudeQuestions": [],
-          "claudeUpdates": [],
           "createdAt": "2026-02-24T12:00:00",
           "updatedAt": "2026-02-24T12:00:00"
         }
@@ -217,17 +158,8 @@
           "description": "Create a dedicated GitHub repo for this Kanban project. Each project in the board can have its own repo; this one is for the Kanban app itself.",
           "status": "todo",
           "priority": "high",
-          "assignedTo": "cursor",
-          "claudeStatus": "pending",
-          "claudeInstructions": "",
-          "claudeQuestions": [],
-          "claudeUpdates": [],
           "createdAt": "2026-02-24T16:00:00",
-          "updatedAt": "2026-02-25T10:05:25.355185",
-          "cursorFiles": [],
-          "cursorWorkDir": "",
-          "cursorBranch": null,
-          "cursorAgentId": null
+          "updatedAt": "2026-02-25T10:05:25.355185"
         },
         {
           "id": "t_002_strip_ai",
@@ -235,16 +167,8 @@
           "description": "No AI is attached. Remove: project/task assign-to-Claude, Claude review, Aider integration, task Q&A, any AI status/instructions UI and backend endpoints.",
           "status": "todo",
           "priority": "high",
-          "assignedTo": null,
-          "claudeStatus": null,
-          "claudeInstructions": "",
-          "claudeQuestions": [],
-          "claudeUpdates": [],
           "createdAt": "2026-02-24T16:00:00",
-          "updatedAt": "2026-02-25T09:06:34.540700",
-          "cursorFiles": [],
-          "cursorWorkDir": "",
-          "cursorBranch": null
+          "updatedAt": "2026-02-25T09:06:34.540700"
         },
         {
           "id": "t_003_strip_asana",
@@ -252,11 +176,6 @@
           "description": "Remove Asana integration: sync/pull UI, backend Asana routes, link/unlink, attach-doc. Keep project/task data local only.",
           "status": "todo",
           "priority": "high",
-          "assignedTo": null,
-          "claudeStatus": null,
-          "claudeInstructions": "",
-          "claudeQuestions": [],
-          "claudeUpdates": [],
           "createdAt": "2026-02-24T16:00:00",
           "updatedAt": "2026-02-24T16:00:00"
         },
@@ -266,11 +185,6 @@
           "description": "List what was removed (AI, Asana, n8n, etc.) so we can add them back later if needed.",
           "status": "todo",
           "priority": "medium",
-          "assignedTo": null,
-          "claudeStatus": null,
-          "claudeInstructions": "",
-          "claudeQuestions": [],
-          "claudeUpdates": [],
           "createdAt": "2026-02-24T16:00:00",
           "updatedAt": "2026-02-24T16:00:00"
         }
