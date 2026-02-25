@@ -1,0 +1,291 @@
+{
+  "projects": [
+    {
+      "id": "p_20260224140000_qualityassurancebot",
+      "title": "QualityAssuranceBot",
+      "description": "Webapp for agent call quality assurance: upload an audio recording of a support/sales call, transcribe it, then compare the agent's performance against their assigned call script and produce a structured review document. Target flow: (1) Upload audio file (e.g. WAV, MP3, M4A); (2) Server-side transcoding/transcription (e.g. Whisper or similar) to get a transcript; (3) User provides or selects the call script for that agent/campaign; (4) System compares transcript to script (coverage of required points, adherence, missed items, extra or off-script content); (5) Generate a review document summarizing how the agent did with scores, highlights, and improvement notes. Enables QA leads to batch-review calls and keep agents aligned to scripts.",
+      "status": "backlog",
+      "priority": "high",
+      "dueDate": "2026-05-01",
+      "tags": [
+        "qa",
+        "call-review",
+        "transcription",
+        "agents",
+        "webapp"
+      ],
+      "codeDir": "/home/lauchlan/Projects/kanban-projects/quality-assurance-bot",
+      "dependencies": [],
+      "blockedBy": [],
+      "blocks": [],
+      "tasks": [
+        {
+          "id": "t_001_upload",
+          "title": "Audio upload UI and storage (ingest pipeline)",
+          "description": "",
+          "status": "todo",
+          "priority": "high",
+          "assignedTo": "claude",
+          "claudeStatus": "blocked",
+          "claudeInstructions": "",
+          "claudeQuestions": [],
+          "claudeUpdates": [
+            {
+              "id": "u_20260225082947_04fa1e99",
+              "type": "progress",
+              "content": "Bureau job started. Running in background\u2014typically 5\u201330 min. Task will update when complete.",
+              "timestamp": "2026-02-25T08:29:47.726864"
+            },
+            {
+              "id": "u_20260225082947_69be4e42",
+              "type": "blocked",
+              "content": "Bureau submit failed: Bureau returned 400: ",
+              "timestamp": "2026-02-25T08:29:47.733025"
+            }
+          ],
+          "createdAt": "2026-02-24T14:00:00",
+          "updatedAt": "2026-02-25T08:29:47.724483"
+        },
+        {
+          "id": "t_002_transcribe",
+          "title": "Transcription service (transcode + speech-to-text)",
+          "description": "",
+          "status": "todo",
+          "priority": "high",
+          "assignedTo": "cursor",
+          "claudeStatus": "pending",
+          "claudeInstructions": "",
+          "claudeQuestions": [],
+          "claudeUpdates": [],
+          "createdAt": "2026-02-24T14:00:00",
+          "updatedAt": "2026-02-25T08:35:27.634091",
+          "cursorFiles": [],
+          "cursorWorkDir": "",
+          "cursorBranch": null
+        },
+        {
+          "id": "t_003_scripts",
+          "title": "Call script management (store, version, assign to agent/campaign)",
+          "description": "",
+          "status": "todo",
+          "priority": "high",
+          "assignedTo": null,
+          "claudeStatus": null,
+          "claudeInstructions": "",
+          "claudeQuestions": [],
+          "claudeUpdates": [],
+          "createdAt": "2026-02-24T14:00:00",
+          "updatedAt": "2026-02-24T14:00:00"
+        },
+        {
+          "id": "t_004_compare",
+          "title": "Script-vs-transcript comparison logic and scoring",
+          "description": "",
+          "status": "todo",
+          "priority": "high",
+          "assignedTo": null,
+          "claudeStatus": null,
+          "claudeInstructions": "",
+          "claudeQuestions": [],
+          "claudeUpdates": [],
+          "createdAt": "2026-02-24T14:00:00",
+          "updatedAt": "2026-02-24T14:00:00"
+        },
+        {
+          "id": "t_005_review",
+          "title": "Review document generation and export",
+          "description": "",
+          "status": "todo",
+          "priority": "medium",
+          "assignedTo": null,
+          "claudeStatus": null,
+          "claudeInstructions": "",
+          "claudeQuestions": [],
+          "claudeUpdates": [],
+          "createdAt": "2026-02-24T14:00:00",
+          "updatedAt": "2026-02-24T14:00:00"
+        }
+      ],
+      "workLog": [
+        {
+          "id": "w_001",
+          "date": "2026-02-24",
+          "content": "Project defined: QA webapp for agent call review \u2014 upload audio, transcribe, compare to script, produce review doc.",
+          "createdAt": "2026-02-24T14:00:00"
+        }
+      ],
+      "createdAt": "2026-02-24T14:00:00",
+      "updatedAt": "2026-02-25T08:35:27.634109"
+    },
+    {
+      "id": "p_20260224120000_gamichor1",
+      "title": "Gamichor",
+      "description": "Gamichor is the internal codename for the gaming/chore integration project. It combines gamification with household and task management: points, streaks, and achievements for completing chores and habits. Target platform is web and mobile; backend services handle user accounts, task definitions, and reward logic.",
+      "status": "backlog",
+      "priority": "high",
+      "dueDate": "2026-04-15",
+      "tags": [
+        "gamification",
+        "chores",
+        "habits",
+        "mobile",
+        "web"
+      ],
+      "codeDir": "/home/lauchlan/Projects/kanban-projects/gamichor",
+      "dependencies": [],
+      "blockedBy": [],
+      "blocks": [],
+      "tasks": [
+        {
+          "id": "t_001_design",
+          "title": "Design core reward and streak model",
+          "description": "",
+          "status": "todo",
+          "priority": "high",
+          "assignedTo": "cursor",
+          "claudeStatus": "pending",
+          "claudeInstructions": "",
+          "claudeQuestions": [],
+          "claudeUpdates": [],
+          "createdAt": "2026-02-24T12:00:00",
+          "updatedAt": "2026-02-25T08:49:44.020222",
+          "cursorFiles": [],
+          "cursorWorkDir": "",
+          "cursorBranch": null
+        },
+        {
+          "id": "t_002_api",
+          "title": "Implement auth and task CRUD API",
+          "description": "",
+          "status": "todo",
+          "priority": "high",
+          "assignedTo": null,
+          "claudeStatus": null,
+          "claudeInstructions": "",
+          "claudeQuestions": [],
+          "claudeUpdates": [],
+          "createdAt": "2026-02-24T12:00:00",
+          "updatedAt": "2026-02-24T12:00:00"
+        },
+        {
+          "id": "t_003_ui",
+          "title": "Build dashboard and task list UI",
+          "description": "",
+          "status": "todo",
+          "priority": "medium",
+          "assignedTo": null,
+          "claudeStatus": null,
+          "claudeInstructions": "",
+          "claudeQuestions": [],
+          "claudeUpdates": [],
+          "createdAt": "2026-02-24T12:00:00",
+          "updatedAt": "2026-02-24T12:00:00"
+        }
+      ],
+      "workLog": [
+        {
+          "id": "w_001",
+          "date": "2026-02-24",
+          "content": "Project kickoff: defined scope as gamification + chores; decided on web-first then mobile.",
+          "createdAt": "2026-02-24T12:00:00"
+        }
+      ],
+      "createdAt": "2026-02-24T12:00:00",
+      "updatedAt": "2026-02-25T08:49:44.020242"
+    },
+    {
+      "id": "p_20260224160000_kanbanmine",
+      "title": "Making Kanban mine",
+      "description": "Strip everything that was built onto the Kanban app for the company. Keep the look and feel; remove features that depend on company infra. No AI is attached \u2014 remove all AI-related features (Claude assign/review, Aider, task-assist, etc.). Remove Asana sync and related UI/API. We can add pieces back later; goal is a clean personal Kanban. Each project can have its own GitHub repo (track in a task).",
+      "status": "backlog",
+      "priority": "high",
+      "dueDate": null,
+      "tags": [
+        "kanban",
+        "refactor",
+        "personal"
+      ],
+      "codeDir": "/home/lauchlan/Projects/kanban-projects/making-kanban-mine",
+      "githubRepo": "RSA-Omen/Project-Kanban-Homelab",
+      "dependencies": [],
+      "blockedBy": [],
+      "blocks": [],
+      "tasks": [
+        {
+          "id": "t_001_github",
+          "title": "Set up project GitHub repo",
+          "description": "Create a dedicated GitHub repo for this Kanban project. Each project in the board can have its own repo; this one is for the Kanban app itself.",
+          "status": "todo",
+          "priority": "high",
+          "assignedTo": "cursor",
+          "claudeStatus": "pending",
+          "claudeInstructions": "",
+          "claudeQuestions": [],
+          "claudeUpdates": [],
+          "createdAt": "2026-02-24T16:00:00",
+          "updatedAt": "2026-02-25T10:05:25.355185",
+          "cursorFiles": [],
+          "cursorWorkDir": "",
+          "cursorBranch": null,
+          "cursorAgentId": null
+        },
+        {
+          "id": "t_002_strip_ai",
+          "title": "Remove all AI features",
+          "description": "No AI is attached. Remove: project/task assign-to-Claude, Claude review, Aider integration, task Q&A, any AI status/instructions UI and backend endpoints.",
+          "status": "todo",
+          "priority": "high",
+          "assignedTo": null,
+          "claudeStatus": null,
+          "claudeInstructions": "",
+          "claudeQuestions": [],
+          "claudeUpdates": [],
+          "createdAt": "2026-02-24T16:00:00",
+          "updatedAt": "2026-02-25T09:06:34.540700",
+          "cursorFiles": [],
+          "cursorWorkDir": "",
+          "cursorBranch": null
+        },
+        {
+          "id": "t_003_strip_asana",
+          "title": "Remove Asana sync",
+          "description": "Remove Asana integration: sync/pull UI, backend Asana routes, link/unlink, attach-doc. Keep project/task data local only.",
+          "status": "todo",
+          "priority": "high",
+          "assignedTo": null,
+          "claudeStatus": null,
+          "claudeInstructions": "",
+          "claudeQuestions": [],
+          "claudeUpdates": [],
+          "createdAt": "2026-02-24T16:00:00",
+          "updatedAt": "2026-02-24T16:00:00"
+        },
+        {
+          "id": "t_004_audit_removed",
+          "title": "Document removed features for later",
+          "description": "List what was removed (AI, Asana, n8n, etc.) so we can add them back later if needed.",
+          "status": "todo",
+          "priority": "medium",
+          "assignedTo": null,
+          "claudeStatus": null,
+          "claudeInstructions": "",
+          "claudeQuestions": [],
+          "claudeUpdates": [],
+          "createdAt": "2026-02-24T16:00:00",
+          "updatedAt": "2026-02-24T16:00:00"
+        }
+      ],
+      "workLog": [
+        {
+          "id": "w_001",
+          "date": "2026-02-24",
+          "content": "Project defined: Making Kanban mine \u2014 strip company-specific features (AI, Asana), keep look; each project gets its own GitHub. Tasks: GitHub repo, remove AI, remove Asana, document removals.",
+          "createdAt": "2026-02-24T16:00:00"
+        }
+      ],
+      "createdAt": "2026-02-24T16:00:00",
+      "updatedAt": "2026-02-25T10:05:25.355195"
+    }
+  ],
+  "wizardDrafts": []
+}

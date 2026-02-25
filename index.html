@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Kanban + AI Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <h1>Project Kanban</h1>
+                <button class="btn btn-primary" onclick="showAddProjectModal()">
+                    <span class="icon">+</span> New Project
+                </button>
+            </div>
+            <div class="header-right">
+                <button class="btn btn-secondary" onclick="exportData()">Export</button>
+                <button class="btn btn-secondary" onclick="importData()">Import</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Kanban Board -->
+            <div class="kanban-board">
+                <!-- Backlog Column -->
+                <div class="kanban-column" data-status="backlog">
+                    <div class="column-header">
+                        <h2>Backlog</h2>
+                        <span class="task-count" id="count-backlog">0</span>
+                    </div>
+                    <div class="column-content" id="backlog" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    </div>
+                </div>
+
+                <!-- In Progress Column -->
+                <div class="kanban-column" data-status="in-progress">
+                    <div class="column-header">
+                        <h2>In Progress</h2>
+                        <span class="task-count" id="count-in-progress">0</span>
+                    </div>
+                    <div class="column-content" id="in-progress" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    </div>
+                </div>
+
+                <!-- Review Column -->
+                <div class="kanban-column" data-status="review">
+                    <div class="column-header">
+                        <h2>Review</h2>
+                        <span class="task-count" id="count-review">0</span>
+                    </div>
+                    <div class="column-content" id="review" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    </div>
+                </div>
+
+                <!-- Done Column -->
+                <div class="kanban-column" data-status="done">
+                    <div class="column-header">
+                        <h2>Done</h2>
+                        <span class="task-count" id="count-done">0</span>
+                    </div>
+                    <div class="column-content" id="done" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Assistant Panel -->
+            <div class="ai-panel">
+                <div class="ai-panel-header">
+                    <h2>AI Work Log</h2>
+                    <div class="ai-panel-controls">
+                        <button class="btn btn-small" onclick="clearAILog()">Clear</button>
+                        <button class="btn btn-small" onclick="copyAILog()">Copy</button>
+                    </div>
+                </div>
+
+                <!-- Project Selector -->
+                <div class="project-selector">
+                    <label for="active-project">Active Project:</label>
+                    <select id="active-project" onchange="selectActiveProject()">
+                        <option value="">-- Select Project --</option>
+                    </select>
+                </div>
+
+                <!-- AI Input Area -->
+                <div class="ai-input-area">
+                    <div class="step-type-selector">
+                        <button class="step-btn active" data-type="step" onclick="setStepType('step')">Step</button>
+                        <button class="step-btn" data-type="note" onclick="setStepType('note')">Note</button>
+                        <button class="step-btn" data-type="decision" onclick="setStepType('decision')">Decision</button>
+                        <button class="step-btn" data-type="blocker" onclick="setStepType('blocker')">Blocker</button>
+                    </div>
+                    <textarea id="ai-input" placeholder="Describe what you're working on or paste AI suggestions..." rows="3"></textarea>
+                    <div class="ai-input-actions">
+                        <button class="btn btn-primary" onclick="addStep()">Add Entry</button>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="auto-timestamp" checked>
+                            Auto-timestamp
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Work Log Display -->
+                <div class="work-log" id="work-log">
+                    <div class="empty-state">
+                        <p>Select a project and start logging your work steps.</p>
+                        <p class="hint">The AI assistant will help you track your progress.</p>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3>Quick Templates</h3>
+                    <div class="template-buttons">
+                        <button class="template-btn" onclick="addTemplate('started')">Started Working</button>
+                        <button class="template-btn" onclick="addTemplate('completed')">Completed Task</button>
+                        <button class="template-btn" onclick="addTemplate('blocked')">Hit Blocker</button>
+                        <button class="template-btn" onclick="addTemplate('review')">Ready for Review</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Project Modal -->
+    <div class="modal" id="project-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">New Project</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="project-form" onsubmit="saveProject(event)">
+                <input type="hidden" id="project-id">
+                <div class="form-group">
+                    <label for="project-title">Project Title *</label>
+                    <input type="text" id="project-title" required placeholder="e.g., Gekko Tracks M6">
+                </div>
+                <div class="form-group">
+                    <label for="project-description">Description</label>
+                    <textarea id="project-description" rows="3" placeholder="Brief project description..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="project-priority">Priority</label>
+                        <select id="project-priority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                            <option value="critical">Critical</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-due">Due Date</label>
+                        <input type="date" id="project-due">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="project-tags">Tags (comma-separated)</label>
+                    <input type="text" id="project-tags" placeholder="e.g., frontend, urgent, phase-2">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Project Detail Modal -->
+    <div class="modal" id="detail-modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h2 id="detail-title">Project Details</h2>
+                <button class="close-btn" onclick="closeDetailModal()">&times;</button>
+            </div>
+            <div class="detail-content">
+                <div class="detail-main">
+                    <div class="detail-section">
+                        <h3>Description</h3>
+                        <p id="detail-description"></p>
+                    </div>
+                    <div class="detail-section">
+                        <h3>Work Log</h3>
+                        <div id="detail-worklog" class="detail-worklog"></div>
+                    </div>
+                </div>
+                <div class="detail-sidebar">
+                    <div class="detail-meta">
+                        <div class="meta-item">
+                            <label>Status</label>
+                            <span id="detail-status" class="status-badge"></span>
+                        </div>
+                        <div class="meta-item">
+                            <label>Priority</label>
+                            <span id="detail-priority" class="priority-badge"></span>
+                        </div>
+                        <div class="meta-item">
+                            <label>Due Date</label>
+                            <span id="detail-due"></span>
+                        </div>
+                        <div class="meta-item">
+                            <label>Created</label>
+                            <span id="detail-created"></span>
+                        </div>
+                        <div class="meta-item">
+                            <label>Tags</label>
+                            <div id="detail-tags" class="tags-container"></div>
+                        </div>
+                    </div>
+                    <div class="detail-actions">
+                        <button class="btn btn-primary" onclick="editCurrentProject()">Edit</button>
+                        <button class="btn btn-danger" onclick="deleteCurrentProject()">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Hidden file input for import -->
+    <input type="file" id="import-file" accept=".json" style="display:none" onchange="handleImport(event)">
+
+    <script src="app.js"></script>
+</body>
+</html>
